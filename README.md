@@ -1,8 +1,8 @@
 # vue_cli_app
 
 #### 项目介绍
-离开laravel框架，使用vue-cli搭建纯webpack模板的vue项目
-该项目主要尝试开发了四五个laravel-vue项目都没有使用过的vuex状态管理器
+制作一个个人网站，使用vue-cli搭建纯webpack模板的vue-element ui项目
+该项目主要尝试单独开发vue项目，练手
 
 #### 软件架构
 软件架构说明
@@ -16,9 +16,26 @@
 
 #### 使用说明
 
-1. xxxx
-2. xxxx
-3. xxxx
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# run unit tests
+npm run unit
+
+# run e2e tests
+npm run e2e
+
+# run all tests
+npm test
 
 #### 参与贡献
 
