@@ -2,6 +2,7 @@
   <div id="app">
     <img src="./assets/logo.png">
     <p>{{getName}}  <el-button @click='changeName'>Rename</el-button></p>
+<!--    一个测试加减的-->
     <router-link to="test1">go to test1</router-link>
     <router-view/>
   </div>
