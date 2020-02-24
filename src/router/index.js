@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
 import Test1 from '@/components/test1'
 import homePage from '@/pages/home-pages/home-page'
 
 Vue.use(Router)
 
+/**
+ * @author xusy
+ * @creed: 这里用来设置页面的路由，以后这里要加过滤器，拦截器等等，现在先这么做
+ * @date 2020/2/24 20:29
+ */
 /* eslint-disable */
 export default new Router({
   /**
