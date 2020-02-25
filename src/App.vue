@@ -16,7 +16,7 @@
         </el-menu>
       </el-header>
 <!--      main-->
-      <el-main>
+      <el-main style="background-color: #aaaaaa;">
         <router-view/>
       </el-main>
     </el-container>
@@ -51,7 +51,9 @@ export default {
   mounted: function () {
     // 拿到整个连接 （现在这里做的不好，以后得改）
     const relUrl = window.location.href.split('/#/')[1]
-    this.activeIndex = '/' + relUrl
+    if (relUrl) {
+      this.activeIndex = '/' + relUrl
+    }
   },
   watch: {
     // 目前这种获去路由监听事件，监听不到（不知道为什么）
