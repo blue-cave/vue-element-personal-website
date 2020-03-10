@@ -1,11 +1,9 @@
 <template>
   <div id="app">
     <el-container>
-<!--      header-->
       <el-header>
         <el-menu
           :default-active="activeIndex"
-          class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
           background-color="#545c64"
@@ -15,7 +13,6 @@
           <el-menu-item v-for="(item, index) in getNavHeader" :key="index" :index="item.path">{{ item.name }}</el-menu-item>
         </el-menu>
       </el-header>
-<!--      main-->
       <el-main style="background-color: #aaaaaa;">
         <router-view/>
       </el-main>
