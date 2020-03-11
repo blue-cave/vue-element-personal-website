@@ -38,7 +38,6 @@ export default {
   methods: {
     // 选择的路由
     handleSelect (keyPath) {
-      console.log(keyPath)
       this.$router.push(keyPath)
     },
     changeName () {
