@@ -25,12 +25,13 @@
       </el-row>
       <!-- 第二部分 绝对定位于窗口-->
       <el-row type="flex" class="myself-absolute-location">
-        <img style="height: 62px; width: 62px; border-radius: 50%; margin: 0px 10px;" src="../../assets/images/head_portrait.png">
-        <div> hello </div>
+        <img class="float-avatar-size" src="../../assets/images/head_portrait.png">
+        <el-row type="flex">
+          <div style="background: #2c3e50; margin: 18px 10px; color: #42b983; border-radius: 5px; line-height: 24px;">bluecave</div> 's resume
+        </el-row>
       </el-row>
       <!-- 显示弹出的一些个人信息 -->
       <!--   这里测试feature/exploit_project   -->
-      <!--   这里测试develop   -->
       <el-row type="flex" justify="center" class="el-avatar-background">
         <div>
           <el-link :underline="false">
@@ -121,54 +122,61 @@ export default {
     height: 400px;
     width: 1200px;
   }
+  /* 浮动的头像的大小 */
+  .float-avatar-size {
+    height: 62px;
+    width: 62px;
+    border-radius: 50%;
+    margin: 0px 10px;
+  }
+  .myself-absolute-location {
+    cursor: pointer;
+    width: 250px;
+    height: 64px;
+    position: fixed;
+    right: 20px;
+    top:30px;
+    background:rgba(255,255,255,0.5);
+    border-radius: 5px;
+    border: 1px #ccc solid;
+  }
+  /* 这是鼠标移入的弹出qq，微信的图片的大小 */
+  .pop-up-show-img-width {
+    width: 130px;
+    height: 150px;
+  }
+  .pop-up-div-img-width{
+    height: 38px;
+    width: 38px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    position: relative;
+  }
+  /* 在鼠标移入之前页面显示的图片 */
+  .pop-up-img-width {
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  /* 个人网站的底部声明 */
+  .statement-bottom-site {
+    padding: 15px 0px;
+    background-color: #2c3e50;
+    color: #FFFFFF;
+    font-size: 14px;
+  }
+  /* 上层div的边距 10px */
+  .el-avatar-background div {
+    padding: 10px;
+  }
 </style>
 
 <style>
-.myself-absolute-location {
-  cursor: pointer;
-  width: 250px;
-  height: 64px;
-  position: fixed;
-  right: 20px;
-  top:30px;
-  background:rgba(255,255,255,0.5);
-  border-radius: 5px;
-  border: 1px #ccc solid;
-}
-/* 这是鼠标移入的弹出qq，微信的图片的大小 */
-.pop-up-show-img-width {
-  width: 130px;
-  height: 150px;
-}
-.pop-up-div-img-width{
-  height: 38px;
-  width: 38px;
-  background-color: #FFFFFF;
-  border-radius: 50%;
-  position: relative;
-}
-/* 在鼠标移入之前页面显示的图片 */
-.pop-up-img-width {
-  height: 28px;
-  width: 28px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-}
-/* 个人网站的底部声明 */
-.statement-bottom-site {
-  padding: 15px 0px;
-  background-color: #2c3e50;
-  color: #FFFFFF;
-  font-size: 14px;
-}
-/* 上层div的边距 10px */
-.el-avatar-background div {
-  padding: 10px;
-}
 /* el-avatar 的背景色*/
 .el-avatar-background .el-avatar {
   background: #404040;
