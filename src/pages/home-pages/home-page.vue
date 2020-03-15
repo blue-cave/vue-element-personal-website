@@ -1,22 +1,14 @@
 <template>
     <div>
 <!--      页面的轮播效果图-->
+<!--      前端web简历，http://www.show08.com/ -->
       <el-row type="flex" style="margin-top: 20px;">
         <el-col :span="4"></el-col>
         <el-col :span="16">
           <div class="block">
             <el-carousel height="400px">
-              <el-carousel-item>
-                <img class="pc_imgBox" src="../../assets/images/carousel_background_1.jpg" alt="1"/>
-              </el-carousel-item>
-              <el-carousel-item>
-                <img class="pc_imgBox" src="../../assets/images/carousel_background_2.jpg" alt="2"/>
-              </el-carousel-item>
-              <el-carousel-item>
-                <img class="pc_imgBox" src="../../assets/images/carousel_background_3.jpg" alt="3"/>
-              </el-carousel-item>
-              <el-carousel-item>
-                <img class="pc_imgBox" src="../../assets/images/carousel_background_4.jpg" alt="4"/>
+              <el-carousel-item v-for="(imgItem, imgIndex) in imgList" :key="imgIndex">
+                <img class="pc_imgBox" :src="imgItem.site" :alt="imgItem.alt" :title="imgItem.title"/>
               </el-carousel-item>
             </el-carousel>
           </div>
@@ -25,10 +17,42 @@
       </el-row>
       <!-- 第二部分 绝对定位于窗口-->
       <el-row type="flex" class="myself-absolute-location">
-        <img class="float-avatar-size" src="../../assets/images/head_portrait.png">
+        <img class="float-avatar-size" :src="head_portrait">
         <el-row type="flex">
-          <div style="background: #2c3e50; margin: 18px 10px; color: #42b983; border-radius: 5px; line-height: 24px;">bluecave</div> 's resume
+          <div style="background: #2c3e50; margin: 15px 5px; color: #42b983; border-radius: 5px; font-size: 20px; line-height: 30px;">bluecave</div>
+          <div style="margin: 18px 0px; line-height: 24px;">'s resume</div>
         </el-row>
+      </el-row>
+<!--      职业生涯-->
+      <el-row type="flex" style="margin: 10px 0px; text-align: left;">
+        <el-col :span="8"></el-col>
+        <el-col :span="8">
+          <el-timeline>
+<!--            <el-timeline-item placement="top"-->
+<!--              v-for="(activity, index) in activities"-->
+<!--              :key="index"-->
+<!--              :icon="activity.icon"-->
+<!--              :type="activity.type"-->
+<!--              :color="activity.color"-->
+<!--              :size="activity.size"-->
+<!--              :timestamp="activity.timestamp">-->
+<!--              {{activity.content}}-->
+<!--            </el-timeline-item>-->
+            <el-timeline-item v-for="(activity, index) in activities" :key="index"
+                              :timestamp="activity.timestamp"
+                              :icon="activity.icon"
+                              :type="activity.type"
+                              :color="activity.color"
+                              :size="activity.size"
+                              placement="top">
+              <el-card>
+                <h4>{{ activity.content }}</h4>
+                <p>提交于 {{ activity.timestamp }}</p>
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </el-col>
+        <el-col :span="8"></el-col>
       </el-row>
       <!-- 显示弹出的一些个人信息 -->
       <!--   这里测试feature/exploit_project   -->
@@ -49,25 +73,11 @@
             </el-tooltip>
           </el-link>
         </div>
-        <div>
-          <el-link :underline="false" href="https://github.com/blue-cave" target="_blank">
+        <div v-for="(item, index) in linkList" :key="index">
+          <el-link :underline="false" :href="item.href" target="_blank">
             <!-- 通过设置effect属性来改变el-tooltip的主题，默认为dark -->
-            <el-tooltip effect="light" content="Git Hub" placement="top">
-              <el-avatar> Git </el-avatar>
-            </el-tooltip>
-          </el-link>
-        </div>
-        <div>
-          <el-link :underline="false" href="https://www.jianshu.com/u/398d3f4b09a2" target="_blank">
-            <el-tooltip effect="light" content="简书" placement="top">
-              <el-avatar> 简 </el-avatar>
-            </el-tooltip>
-          </el-link>
-        </div>
-        <div>
-          <el-link :underline="false" href="https://blog.csdn.net/qq_45376958" target="_blank">
-            <el-tooltip effect="light" content="CSDN" placement="top">
-              <el-avatar> CSDN </el-avatar>
+            <el-tooltip effect="light" :content="item.content" placement="top">
+              <el-avatar> {{ item.name }} </el-avatar>
             </el-tooltip>
           </el-link>
         </div>
@@ -86,24 +96,67 @@ export default {
   data () {
     return {
       message: '页面设置',
+      head_portrait: require('../../assets/images/head_portrait.png'),
       imgList: [
         {
-          name: '图片一',
-          site: '../../assets/images/carousel_background_1.jpg'
+          // 在正常情况下，如果不加require，图片浏览器按照text识别
+          // 还可以把图片放到static文件夹下面，这样可以直接引用
+          // 参考网址 （https://blog.csdn.net/xuebimi/article/details/98175273?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task）
+          site: require('../../assets/images/carousel_background_1.jpg'),
+          title: '图片一',
+          alt: '图片一'
         },
         {
-          name: '图片二',
-          site: '/assets/images/carousel_background_2.jpg'
+          site: require('../../assets/images/carousel_background_2.jpg'),
+          title: '图片二',
+          alt: '图片二'
         },
         {
-          name: '图片三',
-          site: '/assets/images/carousel_background_3.jpg'
+          site: require('../../assets/images/carousel_background_3.jpg'),
+          title: '图片三',
+          alt: '图片三'
         },
         {
-          name: '图片四',
-          site: '/assets/images/carousel_background_4.jpg'
+          site: require('../../assets/images/carousel_background_4.jpg'),
+          title: '图片四',
+          alt: '图片四'
         }
-      ]
+      ],
+      linkList: [
+        {
+          href: 'https://github.com/blue-cave',
+          content: 'Git Hub',
+          name: 'Git'
+        },
+        {
+          href: 'https://www.jianshu.com/u/398d3f4b09a2',
+          content: '简书',
+          name: '简'
+        },
+        {
+          href: 'https://blog.csdn.net/qq_45376958',
+          content: 'CSDN',
+          name: 'CSDN'
+        }
+      ],
+      activities: [{
+        content: '支持使用图标',
+        timestamp: '2018-04-12 20:46',
+        size: 'large',
+        type: 'primary',
+        icon: 'el-icon-more'
+      }, {
+        content: '支持自定义颜色',
+        timestamp: '2018-04-03 20:46',
+        color: '#0bbd87'
+      }, {
+        content: '支持自定义尺寸',
+        timestamp: '2018-04-03 20:46',
+        size: 'large'
+      }, {
+        content: '默认样式的节点',
+        timestamp: '2018-04-03 20:46'
+      }]
     }
   },
   methods: {
@@ -119,8 +172,8 @@ export default {
 
   .pc_imgBox {
     border-radius: 10px;
-    height: 400px;
-    width: 1200px;
+    height: 398px;
+    width: 100%;
   }
   /* 浮动的头像的大小 */
   .float-avatar-size {
@@ -139,6 +192,7 @@ export default {
     background:rgba(255,255,255,0.5);
     border-radius: 5px;
     border: 1px #ccc solid;
+    z-index: 99;
   }
   /* 这是鼠标移入的弹出qq，微信的图片的大小 */
   .pop-up-show-img-width {

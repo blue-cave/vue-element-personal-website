@@ -13,7 +13,8 @@
           <el-menu-item v-for="(item, index) in getNavHeader" :key="index" :index="item.path">{{ item.name }}</el-menu-item>
         </el-menu>
       </el-header>
-      <el-main style="background-color: #aaaaaa;">
+<!--      <el-main style="background-color: #aaaaaa;">-->
+      <el-main>
         <router-view/>
       </el-main>
     </el-container>
@@ -52,7 +53,6 @@ export default {
     }
   },
   watch: {
-    // 目前这种获去路由监听事件，监听不到（不知道为什么）
     $route (to, from) {
       console.log('to', to.path)
     }
