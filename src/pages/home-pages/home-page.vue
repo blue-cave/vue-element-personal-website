@@ -1,5 +1,8 @@
 <template>
     <div>
+      <el-row>
+        <!--导航-->
+      </el-row>
 <!--      页面的轮播效果图-->
 <!--      前端web简历，http://www.show08.com/ -->
       <el-row type="flex" style="margin-top: 20px;">
@@ -23,21 +26,39 @@
           <div style="margin: 18px 0px; line-height: 24px;">'s resume</div>
         </el-row>
       </el-row>
+      <el-row>
+        <div>
+          <el-calendar>
+            <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
+            <template
+              slot="dateCell"
+              slot-scope="{date, data}">
+              <div :class="data.isSelected ? 'is-selected' : ''">
+                <div>{{ data.day.split('-').slice(2).join('-') }}</div>
+                <div v-if="solarDate2lunar(data.day).festival" style="color: #f56c6c;">{{ solarDate2lunar(data.day).festival }}</div>
+                <div v-else-if="solarDate2lunar(data.day).Term" style="color: #f56c6c;">{{ solarDate2lunar(data.day).Term }}</div>
+                <div v-else>{{ solarDate2lunar(data.day).IDayCn }}</div>
+                <div v-for="(item, index) in calendarData" :key="index">
+                  <div v-if="(item.months).indexOf(data.day.split('-').slice(1)[0]) != -1">
+                    <div v-if="(item.days).indexOf(data.day.split('-').slice(2).join('-')) != -1">
+                      <el-tooltip effect="light" :content="item.things" placement="top">
+                        <div class="is-selected">{{item.things}}</div>
+                      </el-tooltip>
+                    </div>
+                    <div v-else></div>
+                  </div>
+                  <div v-else></div>
+                </div>
+              </div>
+            </template>
+          </el-calendar>
+        </div>
+      </el-row>
 <!--      职业生涯-->
       <el-row type="flex" style="margin: 10px 0px; text-align: left;">
         <el-col :span="8"></el-col>
         <el-col :span="8">
           <el-timeline>
-<!--            <el-timeline-item placement="top"-->
-<!--              v-for="(activity, index) in activities"-->
-<!--              :key="index"-->
-<!--              :icon="activity.icon"-->
-<!--              :type="activity.type"-->
-<!--              :color="activity.color"-->
-<!--              :size="activity.size"-->
-<!--              :timestamp="activity.timestamp">-->
-<!--              {{activity.content}}-->
-<!--            </el-timeline-item>-->
             <el-timeline-item v-for="(activity, index) in activities" :key="index"
                               :timestamp="activity.timestamp"
                               :icon="activity.icon"
@@ -91,6 +112,8 @@
 </template>
 
 <script>
+import { calendar } from '@/utils/calendar'
+
 export default {
   name: 'home-page',
   data () {
@@ -156,13 +179,23 @@ export default {
       }, {
         content: '默认样式的节点',
         timestamp: '2018-04-03 20:46'
-      }]
+      }],
+      calendarData: [
+        { months: ['03', '04'], days: ['15'], things: '看电影' },
+        { months: ['02', '05'], days: ['02'], things: '去公园野炊' }
+      ]
     }
   },
   methods: {
     // 图片加载失败
     errorHandler () {
       return true
+    },
+    // 显示农历数据
+    solarDate2lunar (solarDate) {
+      let solar = solarDate.split('-')
+      let lunar1 = calendar.solar2lunar(solar[0], solar[1], solar[2])
+      return lunar1
     }
   }
 }
